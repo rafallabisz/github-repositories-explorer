@@ -1,0 +1,23 @@
+@import "assets/styles/abstracts/variables.scss";
+
+.btn {
+  background-color: $primary;
+  border-radius: 0;
+  border: none;
+  width: 100%;
+  color: $gray-04;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $primary-hover;
+  }
+
+  &.disabled, &.disabled:active {
+    cursor: not-allowed;
+    pointer-events: all;
+
+    & .content {
+      pointer-events: none;
+    }
+  }
+}
