@@ -1,11 +1,11 @@
 @import "assets/styles/abstracts/variables.scss";
 
 .btn {
-  background-color: $primary;
+  background-color: $primary-bg;
   border-radius: 0;
   border: none;
   width: 100%;
-  color: $gray-04;
+  color: $primary-color;
   transition: background-color 0.3s ease;
 
   &:hover {

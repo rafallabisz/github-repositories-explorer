@@ -1,11 +1,30 @@
 import { api } from 'utils/api';
-import { ApiResponse, User } from 'types/models';
+import { ApiResponse, UserRepository, User } from 'types/models';
+import { config } from 'config';
 
-export const getUsers = async (username: string, perPage = 5) => {
+export const getUsers = async (
+  username: string,
+  perPage = config.USERS_PER_PAGE,
+  page = config.INITIAL_PAGE,
+) => {
   return api.get<ApiResponse<User>>(`/search/users`, {
     params: {
       q: username,
       per_page: perPage,
+      page,
+    },
+  });
+};
+
+export const getUsersRepos = async (
+  username: string,
+  perPage = config.USERS_REPOS_PER_PAGE,
+  page = config.INITIAL_PAGE,
+) => {
+  return api.get<UserRepository[]>(`/users/${username}/repos`, {
+    params: {
+      per_page: perPage,
+      page,
     },
   });
 };

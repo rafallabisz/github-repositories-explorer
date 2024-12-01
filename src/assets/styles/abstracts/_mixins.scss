@@ -1,0 +1,23 @@
+@import "./variables.scss";
+
+@mixin customScrollbar {
+  & ::-webkit-scrollbar {
+    width: 8px;
+  }
+  /* Track */
+  & ::-webkit-scrollbar-track {
+    background: white;
+  }
+
+  /* Handle */
+  & ::-webkit-scrollbar-thumb {
+    background: $gray-04;
+    border-radius: 0;
+  }
+
+  /* Handle on hover */
+  & ::-webkit-scrollbar-thumb:hover {
+    background: $gray-05;
+
+  }
+}
