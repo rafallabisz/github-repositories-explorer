@@ -1,0 +1,17 @@
+@import 'assets/styles/abstracts/variables.scss';
+
+.container {
+  min-height: 100vh;
+}
+
+.wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem 1rem;
+  max-width: 450px;
+  min-height: 100vh;
+
+  @include media-breakpoint-up(md) {
+    max-width: 720px;
+  }
+}
