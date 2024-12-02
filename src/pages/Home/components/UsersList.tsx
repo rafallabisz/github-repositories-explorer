@@ -7,6 +7,8 @@ import { InfiniteData, UseInfiniteQueryResult, UseQueryResult } from '@tanstack/
 import { ApiResponse, User, UserRepository } from 'types/models';
 import UserRepoItem from 'pages/Home/components/UserRepoItem';
 import GenericInfiniteScroll from 'components/GenericInfiniteScroll';
+import cn from 'classnames';
+import ChevronDown from 'assets/icons/chevron-down.svg';
 
 type Props = {
   openAccordionId: string;
@@ -50,8 +52,18 @@ const UsersList: FC<Props> = ({
             targetId={user.id.toString()}
             onClick={() => handleClickHeader(user.login)}
             onMouseEnter={() => handlePrefetchUserRepos(user.login)}
+            className={styles.accordionHeader}
           >
-            {user.login}
+            <p className={styles.name}>{user.login}</p>
+            <img
+              className={cn(styles.chevronIcon, {
+                [styles.rotated]: openAccordionId === user.id.toString(),
+              })}
+              src={ChevronDown}
+              alt={'chevron'}
+              width={16}
+              height={16}
+            />
           </AccordionHeader>
 
           <AccordionBody accordionId={user.id.toString()}>

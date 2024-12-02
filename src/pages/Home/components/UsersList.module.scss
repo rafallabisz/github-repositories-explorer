@@ -13,14 +13,38 @@
     padding: 0.5rem 1rem;
     box-shadow: none;
     color: $gray-07;
+    display: flex;
+    justify-content: space-between;
 
     &:focus-visible {
       outline: 4px solid $gray-02;
+    }
+
+    &:after {
+      display: none;
     }
   }
 
   :global .accordion-body {
     padding: 0;
     @include customScrollbar;
+  }
+}
+
+.accordionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & .name {
+    margin-bottom: 0;
+  }
+
+  .chevronIcon {
+    transition: transform 0.3s ease;
+  }
+
+  .rotated {
+    transform: rotate(180deg);
   }
 }
