@@ -16,9 +16,9 @@ export const getUsers = async (
   });
 };
 
-export const getUsersRepos = async (
+export const getUserRepos = async (
   username: string,
-  perPage = config.USERS_REPOS_PER_PAGE,
+  perPage = config.USER_REPOS_PER_PAGE,
   page = config.INITIAL_PAGE,
 ) => {
   return api.get<UserRepository[]>(`/users/${username}/repos`, {

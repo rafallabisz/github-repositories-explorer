@@ -1,4 +1,4 @@
-import { getUsers, getUsersRepos } from 'services/userService';
+import { getUsers, getUserRepos } from 'services/userService';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { QueryKey } from 'utils/constants';
 import { config } from 'config';
@@ -21,17 +21,13 @@ export const useUsers = ({ username, perPage, enabled = false }: UsersRequest) =
   });
 };
 
-type UsersReposRequest = UsersRequest & {};
+type UserReposRequest = UsersRequest & {};
 
-export const useInfiniteUsersRepos = ({
-  username,
-  perPage,
-  enabled = false,
-}: UsersReposRequest) => {
+export const useInfiniteUserRepos = ({ username, perPage, enabled = false }: UserReposRequest) => {
   return useInfiniteQuery({
-    queryKey: [QueryKey.USERS_REPOS, username, perPage],
+    queryKey: [QueryKey.USER_REPOS, username, perPage],
     queryFn: async ({ pageParam = 1 }) => {
-      const { data } = await getUsersRepos(username, perPage, pageParam);
+      const { data } = await getUserRepos(username, perPage, pageParam);
       return { data, page: pageParam };
     },
     initialPageParam: 1,
@@ -41,11 +37,11 @@ export const useInfiniteUsersRepos = ({
   });
 };
 
-export const handlePrefetchUsersRepos = async (activeUsername: string) => {
+export const handlePrefetchUserRepos = async (activeUsername: string) => {
   await queryClient.prefetchQuery({
-    queryKey: [QueryKey.USERS_REPOS, activeUsername],
+    queryKey: [QueryKey.USER_REPOS, activeUsername],
     queryFn: async () => {
-      const { data } = await getUsersRepos(activeUsername, config.USERS_REPOS_PER_PAGE);
+      const { data } = await getUserRepos(activeUsername, config.USER_REPOS_PER_PAGE);
       return data;
     },
     staleTime: 10 * 1000, //only prefetch if older than 10 sec

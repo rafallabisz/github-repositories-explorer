@@ -1,0 +1,26 @@
+@import "assets/styles/abstracts/variables.scss";
+@import "assets/styles/abstracts/mixins.scss";
+
+.accordionContainer {
+  :global .accordion-item {
+    border: none;
+  }
+
+  :global .accordion-button {
+    border-radius: 0;
+    background-color: $gray-01;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    box-shadow: none;
+    color: $gray-07;
+
+    &:focus-visible {
+      outline: 4px solid $gray-02;
+    }
+  }
+
+  :global .accordion-body {
+    padding: 0;
+    @include customScrollbar;
+  }
+}
