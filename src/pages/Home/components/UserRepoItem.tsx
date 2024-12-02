@@ -10,7 +10,7 @@ type Props = {
 const UserRepoItem: FC<Props> = ({ repo }) => {
   return (
     <li key={repo.id} className={styles.container}>
-      <div>
+      <div className={styles.wrapper}>
         <p className={styles.name}>{repo.name}</p>
         {repo.description && <p className={styles.description}>{repo.description}</p>}
       </div>

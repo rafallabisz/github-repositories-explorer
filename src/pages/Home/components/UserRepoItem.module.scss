@@ -8,6 +8,11 @@
   background-color: $gray-03;
   min-height: 120px;
 
+  & .wrapper {
+    flex: 1;
+    min-width: 0;
+  }
+
   & .name {
     font-size: 20px;
     font-weight: 700;
