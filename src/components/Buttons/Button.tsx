@@ -3,7 +3,7 @@ import { Button as ButtonRS, ButtonProps, Spinner } from 'reactstrap';
 import styles from 'components/Buttons/Button.module.scss';
 import cn from 'classnames';
 
-type Props = {
+export type Props = {
   children: string;
   isLoading?: boolean;
 } & ButtonProps;
@@ -14,7 +14,6 @@ const Button: FC<Props> = ({
   onClick,
   disabled,
   isLoading = false,
-  size = 'sm',
   ...props
 }: Props) => {
   const isDisabled = disabled || isLoading;
@@ -29,7 +28,7 @@ const Button: FC<Props> = ({
       disabled={isDisabled}
     >
       {isLoading ? (
-        <Spinner size={size} as={'span'} role={'status'} />
+        <Spinner size={'sm'} as={'span'} role={'status'} />
       ) : (
         <span className={styles.content}>{children}</span>
       )}

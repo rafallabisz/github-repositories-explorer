@@ -12,6 +12,7 @@ type Props = {
   openAccordionId: string;
   toggleAccordion: (id: string) => void;
   handleClickHeader: (username: string) => void;
+  noUsersFound: boolean;
   queryUsers: UseQueryResult<ApiResponse<User>, Error>;
   queryUserRepos: UseInfiniteQueryResult<
     InfiniteData<
@@ -31,9 +32,8 @@ const UsersList: FC<Props> = ({
   toggleAccordion,
   openAccordionId,
   handleClickHeader,
+  noUsersFound,
 }) => {
-  const noUsersFound = queryUsers.isSuccess && queryUsers.data?.items?.length === 0;
-
   return (
     <Accordion
       open={openAccordionId}

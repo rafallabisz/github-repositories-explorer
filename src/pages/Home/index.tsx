@@ -28,22 +28,23 @@ const Home: FC<Props> = () => {
     if (username) queryUsers.refetch();
   }, [username]);
 
-  const toggleAccordion = (id: string) => {
-    setOpenAccordionId((prev) => (prev === id ? '' : id));
-  };
-
-  const closeAccordion = () => setOpenAccordionId('');
-  const handleClickAccordionHeader = (username: string) => {
-    setSelectedUsername(username);
-  };
-
-  // // refetch user repos and fetch the next page whenever the selectedUsername changes
+  // refetch user repos and fetch the next page whenever the selectedUsername changes
   useEffect(() => {
     if (selectedUsername) {
       queryUserRepos.refetch();
       queryUserRepos.fetchNextPage();
     }
   }, [selectedUsername]);
+
+  const toggleAccordion = (id: string) => {
+    setOpenAccordionId((prev) => (prev === id ? '' : id));
+  };
+
+  const closeAccordion = () => setOpenAccordionId('');
+
+  const handleClickAccordionHeader = (username: string) => {
+    setSelectedUsername(username);
+  };
 
   const noUsersFound = queryUsers.isSuccess && queryUsers.data?.items?.length === 0;
 
@@ -60,6 +61,7 @@ const Home: FC<Props> = () => {
         openAccordionId={openAccordionId}
         toggleAccordion={toggleAccordion}
         handleClickHeader={handleClickAccordionHeader}
+        noUsersFound={noUsersFound}
         queryUsers={queryUsers}
         queryUserRepos={queryUserRepos}
       />
