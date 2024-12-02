@@ -2,6 +2,7 @@ import { ChangeEvent, FC } from 'react';
 import { FormFeedback, Input } from 'reactstrap';
 import styles from './Input.module.scss';
 import { Controller, FieldValues, useFormContext } from 'react-hook-form';
+import cn from 'classnames';
 
 type Props = {
   name: string;
@@ -20,6 +21,7 @@ const InputController: FC<Props> = ({ onChange, ...props }) => {
       {...props}
       control={control}
       render={({ field, fieldState }) => {
+        const hasError = !!fieldState.error;
         return (
           <>
             <Input
@@ -29,8 +31,10 @@ const InputController: FC<Props> = ({ onChange, ...props }) => {
                 field.onChange(e);
                 onChange?.(e);
               }}
-              className={styles.container}
-              invalid={!!fieldState.error}
+              className={cn(styles.container, {
+                [styles.error]: hasError,
+              })}
+              invalid={hasError}
             />
             {fieldState.error && <FormFeedback>{fieldState.error.message}</FormFeedback>}
           </>

@@ -10,7 +10,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { SearchParams } from 'utils/constants';
 
 const schema = yup.object({
-  username: yup.string().required('Username is a required field'),
+  username: yup.string().trim().required('Username is a required field'),
 });
 
 type Inputs = InferType<typeof schema>;
