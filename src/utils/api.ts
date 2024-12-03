@@ -23,18 +23,13 @@ api.interceptors.response.use(
 );
 
 const mutationCache = new MutationCache({
-  onError: (error, _variables, _context, mutation) => {
-    // If this mutation has an onError defined, skip this
-    if (mutation.options.onError) return;
+  onError: (error) => {
     handleGlobalError(error);
   },
 });
 
 const queryCache = new QueryCache({
-  onError: (error, query) => {
-    const options = query.options as any;
-    // If this query has an onError defined, skip this
-    if (options?.onError) return;
+  onError: (error) => {
     handleGlobalError(error);
   },
 });

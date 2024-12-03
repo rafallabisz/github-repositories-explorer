@@ -9,6 +9,7 @@ import UserRepoItem from 'pages/Home/components/UserRepoItem';
 import GenericInfiniteScroll from 'components/GenericInfiniteScroll';
 import cn from 'classnames';
 import ChevronDown from 'assets/icons/chevron-down.svg';
+import UserRepoItemSkeleton from 'pages/Home/components/UserRepoItemSkeleton';
 
 type Props = {
   openAccordionId: string;
@@ -71,6 +72,7 @@ const UsersList: FC<Props> = ({
               queryData={queryUserRepos}
               noItemsMessage={'No repositories found for this user'}
               renderItem={(repo) => <UserRepoItem repo={repo} />}
+              renderItemSkeleton={() => <UserRepoItemSkeleton />}
             />
           </AccordionBody>
         </AccordionItem>

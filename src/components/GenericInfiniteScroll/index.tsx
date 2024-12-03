@@ -3,6 +3,7 @@ import LoadingIndicator from 'components/Loaders/LoadingIndicator';
 import DynamicMessage from 'components/Messages/DynamicMessage/DynamicMessage';
 import styles from './GenericInfiniteScroll.module.scss';
 import { InfiniteData, UseInfiniteQueryResult } from '@tanstack/react-query';
+import cn from 'classnames';
 
 interface GenericInfiniteScrollProps<T> {
   /**
@@ -27,12 +28,17 @@ interface GenericInfiniteScrollProps<T> {
    * @param item
    */
   renderItem: (item: T) => React.ReactNode;
+  /**
+   * A function that renders skeletons for each item while loading.
+   */
+  renderItemSkeleton: () => React.ReactNode;
 }
 
 const GenericInfiniteScroll = <T,>({
   queryData,
   noItemsMessage,
   renderItem,
+  renderItemSkeleton,
 }: GenericInfiniteScrollProps<T>) => {
   const items = queryData?.data?.pages?.flatMap((page) => page.data) || [];
   const isFetchingNextPage = queryData.isFetchingNextPage;
@@ -52,13 +58,21 @@ const GenericInfiniteScroll = <T,>({
   };
 
   return (
-    <div className={styles.scrollContainer} onScroll={handleScroll}>
+    <div
+      className={cn(styles.scrollContainer, {
+        [styles.noData]: noQueryDataFound,
+        [styles.isFetched]: queryData.isFetched,
+      })}
+      onScroll={handleScroll}
+    >
       <DynamicMessage isVisible={noQueryDataFound}>{noItemsMessage}</DynamicMessage>
-      <LoadingIndicator isLoading={isLoading} className="mb-3" />
+
       <ul className={styles.itemList}>
-        {items.map((item, index) => (
-          <React.Fragment key={index}>{renderItem(item)}</React.Fragment>
-        ))}
+        {isLoading
+          ? renderItemSkeleton()
+          : items.map((item, index) => (
+              <React.Fragment key={index}>{renderItem(item)}</React.Fragment>
+            ))}
       </ul>
       <LoadingIndicator isLoading={isFetchingNextPage} className="mt-3" />
     </div>

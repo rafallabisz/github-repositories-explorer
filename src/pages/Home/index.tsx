@@ -9,9 +9,7 @@ import DynamicMessage from 'components/Messages/DynamicMessage/DynamicMessage';
 import SearchForm from 'pages/Home/components/SearchForm';
 import UsersList from 'pages/Home/components/UsersList';
 
-type Props = {};
-
-const Home: FC<Props> = () => {
+const Home: FC = () => {
   const [openAccordionId, setOpenAccordionId] = useState<string>('');
   const [selectedUsername, setSelectedUsername] = useState('');
   const [searchParams] = useSearchParams();
@@ -46,7 +44,7 @@ const Home: FC<Props> = () => {
     setSelectedUsername(username);
   };
 
-  const noUsersFound = queryUsers.isSuccess && queryUsers.data?.items?.length === 0;
+  const noUsersFound = queryUsers.isSuccess && !queryUsers?.data?.items?.length;
 
   return (
     <Card>
