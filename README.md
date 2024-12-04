@@ -5,7 +5,7 @@
 This React application integrates with the [GitHub API](https://docs.github.com/en/rest) and allows users to search for
 GitHub users by their username,
 view the list of repositories for the selected user, and display them with infinite scrolling. The app includes form
-validation, error handling, and search query parameters in the URL.
+validation, error handling, search query parameters in the URL, and skeleton loaders to enhance the user experience.
 
 ## Features
 
@@ -14,9 +14,8 @@ validation, error handling, and search query parameters in the URL.
   the entered text.
 - **User Selection**: Clicking on a user will display the list of repositories for that selected user.
 - **Prefetching**: User repositories are prefetched to improve loading performance.
-- **Infinite Scroll**: Repositories are loaded with infinite scrolling, allowing users to view more without refreshing
-  the
-  page.
+- **Infinite Scroll**: Repositories load dynamically as the user scrolls.
+- **Skeleton Loaders**: Placeholder components are displayed while data is being fetched for a smoother user experience.
 - **Form Validation**: Search input is validated using Yup and React Hook Form to ensure proper format and
   functionality.
 - **Global Error Handling**: Handles errors globally, including those from API requests.
